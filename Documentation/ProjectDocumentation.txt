@@ -2,7 +2,7 @@ About the project Searchify:
 	Followed clean architecture
 	Mediator pattern (used MediatR library)
 	JWT Authentication
-	MS SQL Server
+	MS SQLite Server
 	Xunit testing framework
 
 Project Structure:
