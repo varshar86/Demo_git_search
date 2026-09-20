@@ -1,0 +1,104 @@
+About the project Searchify:
+	Followed clean architecture
+	Mediator pattern (used MediatR library)
+	JWT Authentication
+	MS SQL Server
+	Xunit testing framework
+
+Project Structure:
+	Core
+	    SearchDemo.Domain 
+            SearchDemo.Application
+	Infrastructure
+  	    SearchDemo.Infrastructure
+	Presentation
+	    SearchDemo.API
+	Test 
+	    SearchDemo.Test
+ 
+
+Pre-requisite to run the application:
+	a) Visual studio 2026 (.NET Core 10)
+	
+		
+Using the APIS:	
+1) Generate JWT Token using username and password using login API (/api/login)
+https://localhost:44375/api/login
+Response:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJWYXJ1biIsInVuaXF1ZV9uYW1lIjoiVmFydW4iLCJqdGkiOiIyOTkzNmU4My1lZmE3LTQ3MWEtODM1MS1lYjI4YTI5OTBhNmEiLCJleHAiOjE3ODk4ODgzMjcsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNTMiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3MTUzIn0.BGMlWOgbcOZ_wKTan1dRv8FjoruiIRjaXG6NOLWURxU
+2) Call GetAllProduct by authorizing with JWT token (/api/products)
+https://localhost:44375/api/products
+Response body:
+{
+{
+    "productId": 1,
+    "name": "Mobile Phone",
+    "price": 299.99,
+    "stock": 150,
+    "description": "Latest smartphone with high performance and camera quality.",
+    "category": "Electronics"
+  },
+  {
+    "productId": 2,
+    "name": "Bluetooth Earphones",
+    "price": 79.99,
+    "stock": 250,
+    "description": "Wireless earphones with noise-canceling technology.",
+    "category": "Electronics"
+  },
+  {
+    "productId": 3,
+    "name": "Laptop",
+    "price": 999.99,
+    "stock": 100,
+    "description": "Powerful laptop with 16GB RAM and 512GB SSD.",
+    "category": "Electronics"
+  },
+  {
+    "productId": 4,
+    "name": "Smart Watch",
+    "price": 129.99,
+    "stock": 200,
+    "description": "Fitness tracker with heart rate monitoring and GPS.",
+    "category": "Electronics"
+  },
+  {
+    "productId": 5,
+    "name": "LED TV",
+    "price": 499.99,
+    "stock": 80,
+    "description": "55-inch 4K Ultra HD smart LED television.",
+    "category": "Electronics"
+  }
+}
+3) Call GetProductById using JWT token (/api/product/{id})
+https://localhost:44375/api/product/5
+ 
+Response body:
+{
+  "productId": 5,
+  "name": "LED TV",
+  "price": 499.99,
+  "stock": 80,
+  "description": "55-inch 4K Ultra HD smart LED television.",
+  "category": "Electronics"
+}
+
+3) Call GetSearchdata using JWT token (/api/SearchHistory)
+https://localhost:44375/api/SearchHistory
+ 
+Response body:
+{
+  "productId": 5,
+  "name": "LED TV",
+  "price": 499.99,
+  "stock": 80,
+  "description": "55-inch 4K Ultra HD smart LED television.",
+  "category": "Electronics"
+}
+LOCAL RUNTIME NOTE
+------------------
+The application uses SQLite for local/demo execution. The database is created automatically
+under Searchify\Data\searchify.db. This avoids requiring a machine-specific SQL Server
+instance during evaluation. The solution also contains a solution-local Directory.Build.props
+that disables the .NET workload resolver because this Web API does not use MAUI/iOS/MacCatalyst.

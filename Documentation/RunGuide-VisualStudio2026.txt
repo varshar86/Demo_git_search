@@ -1,0 +1,77 @@
+SEARCHDEMO - VISUAL STUDIO 2026 / .NET 10
+==========================================
+
+IMPORTANT FIX INCLUDED
+----------------------
+This is an ASP.NET Core Web API solution. It does not use MAUI/iOS/MacCatalyst.
+Directory.Build.props disables the .NET workload resolver only for this solution.
+This prevents broken unrelated iOS/MacCatalyst workload manifests from stopping
+this Web API from loading.
+
+The application uses SQLite for local execution, so SQL Server is NOT required.
+The database is created automatically at:
+    Searchify\Data\searchify.db
+
+REQUIREMENTS
+------------
+1. Visual Studio 2026
+2. ASP.NET and web development workload
+3. .NET 10 SDK
+
+RUN IN VISUAL STUDIO
+--------------------
+1. Extract this ZIP to a short path, e.g. C:\Demo\SearchDemo.
+2. Open SearchDemo.sln in Visual Studio 2026.
+3. Close Visual Studio once before the first run if the solution was opened from
+   an older ZIP. Delete all bin and obj folders.
+4. Build > Restore NuGet Packages.
+5. Build > Rebuild Solution.
+6. Right-click SearchDemo.API / Searchify project and choose Set as Startup Project.
+7. Press Ctrl+F5 or F5.
+8. Open the Swagger URL shown in the Output window, normally:
+      https://localhost:7153/swagger
+
+COMMAND LINE
+------------
+From the folder containing SearchDemo.sln:
+    dotnet --version
+    dotnet restore
+    dotnet clean
+    dotnet build SearchDemo.sln
+    dotnet run --project Searchify\SearchDemo.API.csproj
+
+LOGIN
+-----
+POST /api/login
+{
+  "userName": "Varun",
+  "password": "Kumar"
+}
+
+Swagger:
+1. Execute POST /api/login.
+2. Copy the token returned in the Token property.
+3. Click Authorize.
+4. Enter: Bearer <token>
+5. Call GET /api/products.
+
+SAMPLE ENDPOINTS
+----------------
+POST /api/login
+GET  /api/products       (JWT required)
+GET  /api/products/1    (JWT required)
+GET  /api/SearchHistory (JWT required)
+
+CLEAN REBUILD IF NEEDED
+-----------------------
+Close Visual Studio and delete every bin and obj directory under the solution.
+Then reopen SearchDemo.sln and run:
+    dotnet restore
+    dotnet build SearchDemo.sln
+
+IIS
+---
+After local testing succeeds:
+    dotnet publish Searchify\SearchDemo.API.csproj -c Release -o C:\Publish\SearchDemo
+Point IIS to C:\Publish\SearchDemo.
+The server must have the ASP.NET Core Hosting Bundle matching .NET 10.

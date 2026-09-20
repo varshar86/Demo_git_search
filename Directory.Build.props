@@ -1,0 +1,11 @@
+<Project>
+  <!--
+    This solution is an ASP.NET Core Web API and does not use MAUI/iOS/MacCatalyst.
+    Disable the SDK workload resolver for this solution so a broken unrelated
+    workload manifest cannot prevent the web projects from loading/building.
+    This is intentionally solution-local and does not change the machine-wide SDK.
+  -->
+  <PropertyGroup>
+    <MSBuildEnableWorkloadResolver>false</MSBuildEnableWorkloadResolver>
+  </PropertyGroup>
+</Project>
